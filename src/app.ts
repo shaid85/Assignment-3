@@ -13,7 +13,7 @@ app.use(express.json())
 app.use('/api/books', bookRoutes)
 app.use('/api/borrow', borrowRoutes)
 
-// 🔥 Custom error handler should be after all routes
+// Custom error handler should be after all routes
 app.use(errorHandler)
 
 app.get('/', (req: Request, res: Response) => {
