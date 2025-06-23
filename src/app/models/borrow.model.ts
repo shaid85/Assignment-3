@@ -3,7 +3,7 @@
  * Borrow Model Fields & Validation
  */
 
-import mongoose, { Schema, model } from 'mongoose'
+import mongoose, { Schema } from 'mongoose'
 import { BorrowCreate } from '../interfaces/borrow.interface'
 
 /**
@@ -45,7 +45,7 @@ borrowSchema.post('save', async function (doc, next) {
     }
     next()
   } catch (error) {
-    next(new Error('copies not available'))
+    next(new Error('copies not available') || error)
   }
 })
 

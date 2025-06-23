@@ -48,8 +48,10 @@ borrowRoutes.post(
       })
       await borrowRecord.save()
 
+      // 4. Update book copies and availability by static method
       await BookModel.checkAndUpdateAvailability(bookId)
-      // Return response
+
+      // Return response with custom order
       const { _id, ...rest } = borrowRecord.toObject()
 
       res.status(201).json({
@@ -103,7 +105,7 @@ borrowRoutes.get('/', async (req, res, next) => {
         data: [],
       })
     } else {
-      // Reorder keys manually in JS
+      // Reorder response manually
       const orderedSummary = summary.map((item) => ({
         book: item.book,
         totalQuantity: item.totalQuantity,

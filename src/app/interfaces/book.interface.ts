@@ -16,8 +16,8 @@ export interface Book {
   copies: number // Mandatory
   available?: boolean // Defaults true
   // For bulk import
-  createdAt?: String | Date // Optional, automatically managed by the database
-  updatedAt?: String | Date // Optional, automatically managed by the database
+  createdAt?: string | Date // Optional, automatically managed by the database
+  updatedAt?: string | Date // Optional, automatically managed by the database
 }
 
 // interface/book.interface.ts
