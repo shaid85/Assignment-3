@@ -7,27 +7,9 @@ export function errorHandler(
   res: Response,
   next: NextFunction
 ) {
-  // MongoDB duplicate key error
-  if (err.code === 11000) {
-    const field = Object.keys(err.keyPattern || {})[0] || 'field'
-    const value = err.keyValue?.[field]
-
-    return res.status(400).json({
-      message: `${field} "${value}" already exists`,
-      success: false,
-      error: {
-        name: err.name,
-        field,
-        value,
-        errorLabelSet: err.errorLabels || {},
-        errorResponse: err,
-      },
-    })
-  }
-
-  // Handle validation errors
+  // Mongoose Validation Error
   if (err instanceof mongoose.Error.ValidationError) {
-    return res.status(400).json({
+    res.status(400).json({
       message: 'Validation failed',
       success: false,
       error: {
@@ -47,19 +29,20 @@ export function errorHandler(
         ),
       },
     })
+  } else {
+    // Default fallback error
+    const statusCode = err.statusCode || 400
+
+    res.status(statusCode).json({
+      message: err.message || 'Something went wrong',
+      success: false,
+      error: {
+        name: err.name || 'Error',
+        message: err.message || 'An unexpected error occurred',
+        stack: process.env.NODE_ENV === 'development' ? err.stack : undefined,
+        statusCode: statusCode,
+        errorResponse: err,
+      },
+    })
   }
-
-  const statusCode = err.statusCode || 400
-
-  res.status(statusCode).json({
-    message: err.message || 'Something went wrong',
-    success: false,
-    error: {
-      name: err.name || 'Error',
-      message: err.message || 'An unexpected error occurred',
-      stack: process.env.NODE_ENV === 'development' ? err.stack : undefined,
-      statusCode: statusCode,
-      errorResponse: err,
-    },
-  })
 }
