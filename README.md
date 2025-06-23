@@ -6,7 +6,7 @@
 
 ### Live Demo
 
-- [appwrite-react](https://appwrite-reactjs.vercel.app/)
+- [vercel](https://l2b5-assignment-3.vercel.app/)
 
 ## Getting Started
 
