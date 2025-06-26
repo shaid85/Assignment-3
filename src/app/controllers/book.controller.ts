@@ -10,9 +10,7 @@ export const bookRoutes = express.Router()
 
 /**
  * Create Borrow entry
- * @route GET /books
  */
-
 bookRoutes.post(
   '/',
   async (req: Request, res: Response, next: NextFunction) => {
@@ -38,9 +36,7 @@ bookRoutes.post(
 
 /**
  * Get all books with optional filters, sorting, and limit
- * @route GET /books
  */
-
 bookRoutes.get('/', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const {
@@ -68,7 +64,7 @@ bookRoutes.get('/', async (req: Request, res: Response, next: NextFunction) => {
     res.status(200).json({
       success: true,
       message: 'Books retrieved successfully',
-      // Count of books returned
+      // Extra added: Count of books returned
       Book_Show: data.length,
       data,
     })
@@ -103,7 +99,7 @@ bookRoutes.get(
         data,
       })
     } catch (error) {
-      next(error) // Pass to custom error handler
+      next(error)
     }
   }
 )
@@ -162,13 +158,19 @@ bookRoutes.delete(
       }
       const data = await BookModel.deleteOne({ _id: bookId })
 
+      if (data.deletedCount === 0) {
+        const err: any = new Error('Book not found')
+        err.status = 404
+        return next(err)
+      }
+
       res.status(200).json({
         success: true,
         message: 'Book deleted successfully',
         data,
       })
     } catch (error) {
-      next(error) // Pass to custom error handler
+      next(error)
     }
   }
 )

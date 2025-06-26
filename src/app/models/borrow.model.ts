@@ -8,7 +8,6 @@ import { BorrowCreate } from '../interfaces/borrow.interface'
 
 /**
  * Borrow schema
- * Represents a book borrowing transaction.
  */
 const borrowSchema = new Schema<BorrowCreate>(
   {
@@ -28,8 +27,8 @@ const borrowSchema = new Schema<BorrowCreate>(
     },
   },
   {
-    timestamps: true, // Automatically manage createdAt and updatedAt fields
-    versionKey: false, // this disables __v
+    timestamps: true,
+    versionKey: false,
   }
 )
 

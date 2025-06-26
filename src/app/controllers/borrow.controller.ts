@@ -1,6 +1,5 @@
 /**
  * Controller : BorrowController
- * This controller handles the business logic for book-related operations.
  */
 import express, { NextFunction, Request, Response } from 'express'
 import BookModel from '../models/book.model'
@@ -10,10 +9,8 @@ import mongoose from 'mongoose'
 export const borrowRoutes = express.Router()
 
 /**
- * Get all books with filters, sorting, and limit
- * @route GET /books
+ * Borrow a book
  */
-
 borrowRoutes.post(
   '/',
   async (req: Request, res: Response, next: NextFunction) => {
@@ -68,6 +65,8 @@ borrowRoutes.post(
   }
 )
 
+/** * Get borrowed books summary (use aggregate)
+ */
 borrowRoutes.get('/', async (req, res, next) => {
   try {
     const summary = await BorrowModel.aggregate([

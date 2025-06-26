@@ -1,6 +1,5 @@
 /**
  * Book model structure and validation.
- * This model defines the properties of a book in the library system.
  */
 
 import { model, Schema } from 'mongoose'
@@ -61,8 +60,8 @@ bookSchema.statics.checkAndUpdateAvailability = async function (
   }
 }
 
-//Extra try
-// pre-save middleware to update book copies
+// Extra try - book returns then update availability
+// pre-save middleware
 bookSchema.pre('findOneAndUpdate', function (next) {
   const update: any = this.getUpdate()
 
