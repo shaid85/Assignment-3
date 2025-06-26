@@ -1,6 +1,5 @@
 /**
  * server.ts - server handle like - server start, close, error handle etc.
- * This file is responsible for starting the server and listening on a specific port.
  */
 
 import app from './app'
@@ -13,11 +12,15 @@ const port = process.env.PORT || 3000
 
 async function main() {
   try {
-    await mongoose.connect(`${process.env.MONGODB_URL}`)
+    await mongoose.connect(`${process.env.MONGODB_URL}/book-app`)
 
-    app.listen(port, () => {
-      console.log(`Example app listening on port: ${port}`)
-    })
+    console.log('MongoDB connected successfully: ')
+
+    if (process.env.NODE_ENV !== 'production') {
+      app.listen(process.env.PORT || 8080, () => {
+        console.log(`Server running locally on port: ${port}`)
+      })
+    }
   } catch (error) {
     console.log('MongoDB connected Error: ', error)
     process.exit(1)
@@ -26,5 +29,4 @@ async function main() {
 
 main()
 
-// Export Express app as a handler
 export default app
