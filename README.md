@@ -1,12 +1,12 @@
 # Assingnment-3
 
-### 📖Library Management API with Express, TypeScript & MongoDB
+### 📚 Library Management API with Express, TypeScript & MongoDB
 
-## Welcome to - **My Library Management System**
+## 📚 Welcome to - **My Library Management System**
 
 ### Live Demo
 
-- [appwrite-react](https://appwrite-reactjs.vercel.app/)
+- [PH_L2B5-Assignment-3](https://phl2b5-assignment-3.vercel.app/)
 
 ## Getting Started
 

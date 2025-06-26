@@ -146,6 +146,13 @@ bookRoutes.delete(
   '/:bookId',
   async (req: Request, res: Response, next: NextFunction) => {
     try {
+      // Treat invalid IDs the same as not found
+      if (!mongoose.Types.ObjectId.isValid(req.params.bookId)) {
+        const error = new Error('invalid ID')
+        ;(error as any).status = 404
+        return next(error)
+      }
+
       const { bookId } = req.params
       // Treat invalid IDs the same as not found
       if (!mongoose.Types.ObjectId.isValid(req.params.bookId)) {
