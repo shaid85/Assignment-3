@@ -7,17 +7,43 @@ import { errorHandler } from './middlewares/errorHandler'
 import { borrowRoutes } from './app/controllers/borrow.controller'
 
 const app: Application = express()
-// Middleware to parse JSON bodies
+// Middleware to parse JSON requests
 app.use(express.json())
 
 app.use('/api/books', bookRoutes)
 app.use('/api/borrow', borrowRoutes)
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('Welcome to - My Library Management System!')
+  res.send(/* html */ `
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <title>Library Management System</title>
+        <style>
+          body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #f4f6fa;
+            font-family: Arial, sans-serif;
+          }
+          h1 {
+            color: #2c3e50;
+            font-size: 2rem;
+          }
+        </style>
+      </head>
+      <body>
+        <h1>📚 Welcome to My Library Management System!</h1>
+      </body>
+    </html>
+  `)
 })
 
-// Custom error handler should be after all routes
+// Custom error handler
 app.use(errorHandler)
 
 export default app
