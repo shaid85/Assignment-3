@@ -6,7 +6,7 @@
 
 ### Live Demo
 
-- [vercel](https://l2b5-assignment-3.vercel.app/)
+- [appwrite-react](https://appwrite-reactjs.vercel.app/)
 
 ## Getting Started
 
@@ -35,13 +35,19 @@ npm install express mongoose
 npm install --save-dev @types/express
 ```
 
+Install dotenv
+
+```bash
+npm install dotenv
+```
+
 Install ts-node-dev
 
 ```bash
 npm i ts-node-dev --save-dev
 ```
 
-Configure "scripts" of package.json file
+Configure "scripts" of package.json file (for local run)
 
 ```bash
 "scripts": {
@@ -233,3 +239,21 @@ npm run dev
 ```
 
 ## Deploy on Vercel
+
+```json
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/server.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/server.ts"
+    }
+  ]
+}
+```
