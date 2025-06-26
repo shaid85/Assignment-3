@@ -27,11 +27,11 @@ app.get('/', (req: Request, res: Response) => {
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: #f4f6fa;
+            background: #000;
             font-family: Arial, sans-serif;
           }
           h1 {
-            color: #2c3e50;
+            color: #fff;
             font-size: 2rem;
           }
         </style>
