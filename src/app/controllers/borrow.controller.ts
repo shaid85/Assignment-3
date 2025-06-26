@@ -1,5 +1,6 @@
 /**
  * Controller : BorrowController
+ * This controller handles the business logic for book-borrow operations.
  */
 import express, { NextFunction, Request, Response } from 'express'
 import BookModel from '../models/book.model'

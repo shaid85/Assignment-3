@@ -1,6 +1,6 @@
 /**
  * Controller : BookController
- * This controller handles the business logic for book-related operations.
+ * This controller handles the business logic for book-related operations like: borrowed books returning.
  */
 import express, { NextFunction, Request, Response } from 'express'
 import BookModel from '../models/book.model'
