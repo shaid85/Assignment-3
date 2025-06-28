@@ -153,7 +153,7 @@ npm run dev
 
 ### ✏️ Update a Book
 
-- Method: `PATCH`
+- Method: `PUT`
 - Endpoint: `/api/books/:bookId`
 - Request Body: (any updatable fields from create schema)
 
