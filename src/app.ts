@@ -12,7 +12,7 @@ const app: Application = express()
 app.use(express.json())
 app.use(
   cors({
-    origin: ['http://localhost:5173', 'https://assingnment-4-chi.vercel.app/'],
+    origin: ['http://localhost:5173', 'https://assingnment-4-chi.vercel.app'],
   })
 )
 app.use('/api/books', bookRoutes)
