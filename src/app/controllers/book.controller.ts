@@ -44,15 +44,22 @@ bookRoutes.get('/', async (req: Request, res: Response, next: NextFunction) => {
       sortBy = 'createdAt',
       sort = 'asc',
       limit = '10',
+      offset = '0',
     } = req.query
 
     const query = filter
       ? { genre: new RegExp(`^${filter}$`, 'i') } // case-insensitive match
       : {}
 
+    const limitNum = parseInt(limit as string, 10)
+    const offsetNum = parseInt(offset as string, 10)
+
     const data = await BookModel.find(query)
       .sort({ [sortBy as string]: sort === 'desc' ? -1 : 1 })
-      .limit(parseInt(limit as string, 10))
+      .skip(offsetNum) // 🆕 Skip for pagination
+      .limit(limitNum)
+
+    const total = await BookModel.countDocuments(query) // 🆕 total count
 
     // If filter was applied but no results found
     if (filter && data.length === 0) {
@@ -66,6 +73,7 @@ bookRoutes.get('/', async (req: Request, res: Response, next: NextFunction) => {
       message: 'Books retrieved successfully',
       // Extra added: Count of books returned
       Book_Show: data.length,
+      total, // 🆕 total matching books
       data,
     })
   } catch (error) {
